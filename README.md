@@ -61,3 +61,12 @@ Example questions:
 
 -   How do I arm the drone?
 -   How can I upload a mission?
+
+## The tech stacks I used
+
+-   BeautifulSoup for parsing the mavsdk offical api.
+-   RecursiveCharacterTextSplitter for chunking.
+-   SentenceTransformers (all-MiniLM-L6-v2) for embeddings.
+-   ChromaDB for vector database.
+-   Flask for backend.
+-   React for frontend.

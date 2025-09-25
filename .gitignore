@@ -5,3 +5,4 @@ env/
 venv/
 frontend/node_modules/
 backend/jsons/
+chroma_store/
