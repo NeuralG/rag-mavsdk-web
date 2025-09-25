@@ -1,0 +1,132 @@
+:root {
+	--color-primary: #8024e7;
+	--color-secondary: #a869ef;
+	--color-tertiary: #d0aef6;
+	--color-background: #f8f3fe;
+	--color-surface: #ffffff;
+	--color-text: #1a1a1a;
+	--color-text-muted: #5c6b85;
+	--width: 800px;
+}
+
+.empty-body {
+	margin: auto;
+}
+
+.text-body {
+	display: flex;
+	margin-top: 32px;
+	margin-bottom: 32px;
+	gap: 16px;
+	flex-direction: column;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	align-items: center;
+	padding: 50px;
+	width: 100%;
+	max-width: var(--width);
+}
+
+.markdown-body {
+	display: flex;
+	flex-direction: column;
+	font-size: 16px;
+	max-width: var(--width);
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.markdown-body p {
+	padding: 0;
+	margin: 0;
+}
+
+.user-text {
+	align-self: flex-end;
+	background-color: var(--color-primary);
+	color: #fff;
+}
+
+.ai-text {
+	align-self: flex-start;
+	color: var(--color-text);
+	background-color: var(--color-surface);
+}
+
+form {
+	display: flex;
+	gap: 16px;
+	margin-bottom: 48px;
+	margin-top: auto;
+	max-width: var(--width);
+	flex-grow: 1;
+	width: 100%;
+}
+
+form button {
+	padding: 10px;
+}
+
+form input {
+	flex: 1;
+	font-size: 16px;
+	min-width: 0;
+	padding: 12px;
+}
+
+button {
+	background-color: var(--color-primary);
+	color: var(--color-surface);
+	border: none;
+	padding: 10px 16px;
+	border-radius: 6px;
+}
+
+button:hover {
+	background-color: var(--color-secondary);
+}
+
+h1,
+h2,
+h3 {
+	color: var(--color-text);
+}
+
+html,
+body,
+main,
+.text-body,
+#root {
+	height: 100%;
+}
+
+main {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: var(--color-background);
+	color: var(--color-text);
+}
+
+.thinking::after {
+	content: "";
+	display: inline-block;
+	width: 1ch;
+	animation: dots 1.5s steps(3, end) infinite;
+}
+
+@keyframes dots {
+	0% {
+		content: "";
+	}
+	33% {
+		content: ".";
+	}
+	66% {
+		content: "..";
+	}
+	100% {
+		content: "...";
+	}
+}
