@@ -23,8 +23,9 @@
 	overflow-x: hidden;
 	align-items: center;
 	padding: 50px;
-	width: 100%;
+	width: 90%;
 	max-width: var(--width);
+	overflow-y: auto !important;
 }
 
 .markdown-body {
@@ -39,6 +40,19 @@
 .markdown-body p {
 	padding: 0;
 	margin: 0;
+}
+
+/* fixes the wrapping of markdown */
+.markdown-body {
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	overflow-wrap: anywhere;
+}
+
+.markdown-body pre,
+.markdown-body code {
+	white-space: pre-wrap;
+	word-break: break-word;
 }
 
 .user-text {
@@ -59,7 +73,7 @@
 	margin-bottom: 48px;
 	margin-top: auto;
 	max-width: var(--width);
-	width: 100%;
+	width: 90%;
 	flex-grow: 1;
 }
 
@@ -164,6 +178,12 @@ form input {
 	font-size: 16px;
 	min-width: 0;
 	padding: 12px;
+	border-radius: 10px;
+}
+
+form input:focus {
+	border: 1px solid #7b2ff7;
+	box-shadow: 0 0 4px rgba(123, 47, 247, 0.5); /* subtle glow */
 }
 
 button {
