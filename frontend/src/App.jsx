@@ -10,6 +10,8 @@ function App() {
 	const [query, setQuery] = useState("")
 	const [loading, setLoading] = useState(false)
 	const [isUsingRAG, setIsUsingRAG] = useState(true)
+	const [lastN, setLastN] = useState(2)
+	const [isOptionsHidden, setIsOptionsHidden] = useState(false)
 
 	useEffect(() => {
 		document.title = "RAG Frontend Demo"
@@ -69,22 +71,45 @@ function App() {
 				setQuery={setQuery}
 				handleSubmit={handleSubmit}
 			/>
-			<SwitchMode isUsingRAG={isUsingRAG} setIsUsingRAG={setIsUsingRAG} />
+			<Options
+				isHidden={isOptionsHidden}
+				isUsingRAG={isUsingRAG}
+				setIsUsingRAG={setIsUsingRAG}
+				lastN={lastN}
+				setLastN={setLastN}
+			/>
 		</main>
+	)
+}
+
+function Options({ isHidden, isUsingRAG, setIsUsingRAG, lastN, setLastN }) {
+	if (isHidden) return
+
+	return (
+		<div className="options-container">
+			<SwitchMode isUsingRAG={isUsingRAG} setIsUsingRAG={setIsUsingRAG} />
+			<SwitchHistoryAmount lastN={lastN} setLastN={setLastN} />
+		</div>
 	)
 }
 
 function MyForm({ query, setQuery, handleSubmit }) {
 	return (
-		<form onSubmit={handleSubmit}>
-			<input
-				type="text"
-				placeholder="Enter drone question..."
-				value={query}
-				onChange={(e) => setQuery(e.target.value)}
-			/>
-			<button type="submit">Submit!</button>
-		</form>
+		<div className="form-container">
+			<button>Options</button>
+			{/* TODO: Replace this with an icon.
+				TODO: Make it functional 
+			*/}
+			<form onSubmit={handleSubmit}>
+				<input
+					type="text"
+					placeholder="Enter drone question..."
+					value={query}
+					onChange={(e) => setQuery(e.target.value)}
+				/>
+				<button type="submit">Submit!</button>
+			</form>
+		</div>
 	)
 }
 
@@ -146,6 +171,53 @@ function SwitchMode({ isUsingRAG, setIsUsingRAG }) {
 					type="checkbox"
 					checked={isUsingRAG}
 					onChange={() => setIsUsingRAG((prev) => !prev)}
+				/>
+			</label>
+		</div>
+	)
+}
+
+function SwitchHistoryAmount({ lastN, setLastN }) {
+	return (
+		<div className="history-container">
+			<label>
+				None:
+				<input
+					type="radio"
+					name="lastN"
+					value={0}
+					checked={lastN == 0}
+					onChange={(e) => setLastN(e.target.value)}
+				/>
+			</label>
+			<label>
+				1:
+				<input
+					type="radio"
+					name="lastN"
+					value={1}
+					checked={lastN == 1}
+					onChange={(e) => setLastN(e.target.value)}
+				/>
+			</label>
+			<label>
+				2:
+				<input
+					type="radio"
+					name="lastN"
+					value={2}
+					checked={lastN == 2}
+					onChange={(e) => setLastN(e.target.value)}
+				/>
+			</label>
+			<label>
+				5:
+				<input
+					type="radio"
+					name="lastN"
+					value={5}
+					checked={lastN == 5}
+					onChange={(e) => setLastN(e.target.value)}
 				/>
 			</label>
 		</div>

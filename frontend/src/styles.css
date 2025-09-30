@@ -53,12 +53,18 @@
 	background-color: var(--color-surface);
 }
 
-form {
+.form-container {
 	display: flex;
 	gap: 16px;
 	margin-bottom: 48px;
 	margin-top: auto;
 	max-width: var(--width);
+	width: 100%;
+}
+
+form {
+	display: flex;
+	gap: 16px;
 	flex-grow: 1;
 	width: 100%;
 }
