@@ -6,7 +6,6 @@ import Options from "./Options"
 import ResultArea from "./ResultArea"
 
 const API_URL = "http://127.0.0.1:5000"
-const LAST_N_MESSAGES = 5
 
 function App() {
 	const [messages, setMessages] = useState([])
@@ -37,7 +36,7 @@ function App() {
 				method: "POST",
 				body: JSON.stringify({
 					question: querySaved,
-					oldMessages: updatedMessages.slice(-LAST_N_MESSAGES),
+					oldMessages: updatedMessages.slice(-lastN),
 				}),
 				headers: { "Content-Type": "application/json" },
 			})
@@ -73,9 +72,11 @@ function App() {
 				query={query}
 				setQuery={setQuery}
 				handleSubmit={handleSubmit}
+				setIsOptionsHidden={setIsOptionsHidden}
 			/>
 			<Options
 				isHidden={isOptionsHidden}
+				setIsHidden={setIsOptionsHidden}
 				isUsingRAG={isUsingRAG}
 				setIsUsingRAG={setIsUsingRAG}
 				lastN={lastN}

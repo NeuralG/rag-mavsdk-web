@@ -1,6 +1,6 @@
 function SwitchMode({ isUsingRAG, setIsUsingRAG }) {
 	return (
-		<div>
+		<div className="mode-container">
 			<label>
 				Use RAG:
 				<input

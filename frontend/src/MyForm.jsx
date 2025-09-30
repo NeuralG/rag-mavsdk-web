@@ -1,7 +1,7 @@
-function MyForm({ query, setQuery, handleSubmit }) {
+function MyForm({ query, setQuery, setIsOptionsHidden, handleSubmit }) {
 	return (
 		<div className="form-container">
-			<button>Options</button>
+			<button onClick={() => setIsOptionsHidden(false)}>Options</button>
 			{/* TODO: Replace this with an icon.
 				TODO: Make it functional 
 			*/}

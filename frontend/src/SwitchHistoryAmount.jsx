@@ -1,46 +1,25 @@
 function SwitchHistoryAmount({ lastN, setLastN }) {
+	const options = [
+		{ label: "None", value: 0 },
+		{ label: "1", value: 1 },
+		{ label: "2", value: 2 },
+		{ label: "5", value: 5 },
+	]
 	return (
 		<div className="history-container">
-			<label>
-				None:
-				<input
-					type="radio"
-					name="lastN"
-					value={0}
-					checked={lastN == 0}
-					onChange={(e) => setLastN(e.target.value)}
-				/>
-			</label>
-			<label>
-				1:
-				<input
-					type="radio"
-					name="lastN"
-					value={1}
-					checked={lastN == 1}
-					onChange={(e) => setLastN(e.target.value)}
-				/>
-			</label>
-			<label>
-				2:
-				<input
-					type="radio"
-					name="lastN"
-					value={2}
-					checked={lastN == 2}
-					onChange={(e) => setLastN(e.target.value)}
-				/>
-			</label>
-			<label>
-				5:
-				<input
-					type="radio"
-					name="lastN"
-					value={5}
-					checked={lastN == 5}
-					onChange={(e) => setLastN(e.target.value)}
-				/>
-			</label>
+			<p>Select last N messages</p>
+			{options.map(({ label, value }) => (
+				<label key={value}>
+					{label}:
+					<input
+						type="radio"
+						name="lastN"
+						value={value}
+						checked={lastN === value}
+						onChange={(e) => setLastN(Number(e.target.value))}
+					/>
+				</label>
+			))}
 		</div>
 	)
 }
