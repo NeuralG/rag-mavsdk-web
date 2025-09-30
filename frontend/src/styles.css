@@ -87,7 +87,7 @@
 }
 
 .history-container {
-	padding: 10px;
+	padding: 0 10px 10px 10px;
 	border: 1px solid #ccc;
 	border-radius: 8px;
 	background: #fafafa;
@@ -98,10 +98,26 @@
 	justify-content: center;
 }
 
-.close-options {
-	align-self: flex-end;
+.upper-container {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
-.mode-container {
+
+.close-options {
+	background-color: rgba(237, 14, 14, 0.875);
+}
+.close-options:hover {
+	background-color: rgba(216, 16, 16, 0.769);
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+	width: 20px;
+	height: 20px;
+	accent-color: var(--color-primary);
+	cursor: pointer;
 }
 
 label {
@@ -135,10 +151,15 @@ button {
 	border: none;
 	padding: 10px 16px;
 	border-radius: 6px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 button:hover {
 	background-color: var(--color-secondary);
+	cursor: pointer;
 }
 
 h1,

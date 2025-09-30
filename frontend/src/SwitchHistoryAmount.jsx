@@ -7,7 +7,7 @@ function SwitchHistoryAmount({ lastN, setLastN }) {
 	]
 	return (
 		<div className="history-container">
-			<p>Select last N messages</p>
+			<p>Message history limit</p>
 			{options.map(({ label, value }) => (
 				<label key={value}>
 					{label}:

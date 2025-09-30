@@ -1,10 +1,11 @@
+import { FiSettings } from "react-icons/fi"
+
 function MyForm({ query, setQuery, setIsOptionsHidden, handleSubmit }) {
 	return (
 		<div className="form-container">
-			<button onClick={() => setIsOptionsHidden(false)}>Options</button>
-			{/* TODO: Replace this with an icon.
-				TODO: Make it functional 
-			*/}
+			<button onClick={() => setIsOptionsHidden(false)}>
+				<FiSettings style={{ fontSize: "20px" }} />
+			</button>
 			<form onSubmit={handleSubmit}>
 				<input
 					type="text"

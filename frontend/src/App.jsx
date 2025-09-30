@@ -13,7 +13,7 @@ function App() {
 	const [loading, setLoading] = useState(false)
 	const [isUsingRAG, setIsUsingRAG] = useState(true)
 	const [lastN, setLastN] = useState(2)
-	const [isOptionsHidden, setIsOptionsHidden] = useState(false)
+	const [isOptionsHidden, setIsOptionsHidden] = useState(true)
 
 	useEffect(() => {
 		document.title = "RAG Frontend Demo"
