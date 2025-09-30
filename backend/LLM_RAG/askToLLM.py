@@ -12,8 +12,11 @@ client = genai.Client(api_key=secret)
 def messageToHistory(oldMessages):
     formatted = []
     for m in oldMessages:
-        role = "User" if m.get("role") == "user" else "AI"
-        formatted.append(f"{role}: {m.get('text')}")
+        if m.get("role") == "user":
+            formatted.append(f"User:{m.get("text")}")
+        else:
+            formatted.append(f"AI: {m.get("answerWithRAG")}")
+
     return "\n".join(formatted)
 
 
@@ -37,6 +40,7 @@ def askLLM(query, oldMessages, nResults=3):
     Answer:
     """
 
+    print(history)
     response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
     return response.text
 

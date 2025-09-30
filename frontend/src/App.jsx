@@ -37,10 +37,13 @@ function App() {
 				method: "POST",
 				body: JSON.stringify({
 					question: querySaved,
-					oldMessages: updatedMessages.slice(-lastN),
+					oldMessages: updatedMessages
+						.filter((m) => m.role == "user" || m.answerWithRAG)
+						.slice(-(lastN * 2 + 1)),
 				}),
 				headers: { "Content-Type": "application/json" },
 			})
+
 			if (!result.ok) throw new Error("Request failed")
 
 			const data = await result.json()
