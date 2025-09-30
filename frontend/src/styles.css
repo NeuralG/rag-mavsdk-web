@@ -60,6 +60,38 @@
 	margin-top: auto;
 	max-width: var(--width);
 	width: 100%;
+	flex-grow: 1;
+}
+
+.form-container button {
+	flex-shrink: 0;
+}
+
+.form-container input {
+	min-width: 200px;
+}
+
+@media screen and (max-width: 450px) {
+	.form-container {
+		display: grid;
+		width: 90%;
+		grid-template-areas:
+			"input input"
+			"button1 button2";
+		gap: 12px;
+	}
+
+	.form-container input {
+		grid-area: input;
+	}
+
+	.form-container button:first-child {
+		grid-area: button1;
+	}
+
+	.form-container button:last-child {
+		grid-area: button2;
+	}
 }
 
 .overlay {
@@ -127,17 +159,6 @@ label {
 	cursor: pointer;
 }
 
-form {
-	display: flex;
-	gap: 16px;
-	flex-grow: 1;
-	width: 100%;
-}
-
-form button {
-	padding: 10px;
-}
-
 form input {
 	flex: 1;
 	font-size: 16px;
@@ -166,6 +187,7 @@ h1,
 h2,
 h3 {
 	color: var(--color-text);
+	text-align: center;
 }
 
 html,
@@ -174,6 +196,7 @@ main,
 .text-body,
 #root {
 	height: 100%;
+	overflow: hidden;
 }
 
 main {
