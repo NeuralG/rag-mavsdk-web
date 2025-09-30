@@ -21,6 +21,7 @@ function App() {
 
 	async function handleSubmit(event) {
 		event.preventDefault()
+		if (!query.trim()) return
 		const querySaved = query
 		setQuery("")
 

@@ -3,7 +3,7 @@ import { FiSettings } from "react-icons/fi"
 function MyForm({ query, setQuery, setIsOptionsHidden, handleSubmit }) {
 	return (
 		<form className="form-container" onSubmit={handleSubmit}>
-			<button onClick={() => setIsOptionsHidden(false)}>
+			<button type="button" onClick={() => setIsOptionsHidden(false)}>
 				<FiSettings style={{ fontSize: "20px" }} />
 			</button>
 			<input
