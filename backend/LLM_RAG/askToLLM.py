@@ -39,3 +39,18 @@ def askLLM(query, oldMessages, nResults=3):
 
     response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
     return response.text
+
+
+def askLLMnoRAG(query, oldMessages):
+    history = messageToHistory(oldMessages)
+
+    prompt = f"""
+    Conversation history:
+    {history}
+
+    Question: {query}
+    Answer:
+    """
+
+    response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
+    return response.text

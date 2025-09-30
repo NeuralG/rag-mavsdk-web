@@ -3,11 +3,13 @@ import "./styles.css"
 import { useState, useEffect } from "react"
 
 const API_URL = "http://127.0.0.1:5000"
+const LAST_N_MESSAGES = 5
 
 function App() {
 	const [messages, setMessages] = useState([])
 	const [query, setQuery] = useState("")
 	const [loading, setLoading] = useState(false)
+	const [isUsingRAG, setIsUsingRAG] = useState(true)
 
 	useEffect(() => {
 		document.title = "RAG Frontend Demo"
@@ -30,14 +32,24 @@ function App() {
 				method: "POST",
 				body: JSON.stringify({
 					question: querySaved,
-					oldMessages: updatedMessages.slice(-5),
+					oldMessages: updatedMessages.slice(-LAST_N_MESSAGES),
 				}),
 				headers: { "Content-Type": "application/json" },
 			})
 			if (!result.ok) throw new Error("Request failed")
 
 			const data = await result.json()
-			setMessages((prev) => [...prev, { role: "ai", text: data.answer }])
+			const answerWithRAG = await data.answerWithRAG
+			const answerWithoutRAG = await data.answerWithoutRAG
+
+			setMessages((prev) => [
+				...prev,
+				{
+					role: "ai",
+					answerWithRAG: answerWithRAG,
+					answerWithoutRAG: answerWithoutRAG,
+				},
+			])
 		} catch (err) {
 			console.error(err)
 		} finally {
@@ -47,12 +59,17 @@ function App() {
 
 	return (
 		<main>
-			<ResultArea messages={messages} loading={loading} />
+			<ResultArea
+				messages={messages}
+				loading={loading}
+				isUsingRAG={isUsingRAG}
+			/>
 			<MyForm
 				query={query}
 				setQuery={setQuery}
 				handleSubmit={handleSubmit}
 			/>
+			<SwitchMode isUsingRAG={isUsingRAG} setIsUsingRAG={setIsUsingRAG} />
 		</main>
 	)
 }
@@ -71,15 +88,30 @@ function MyForm({ query, setQuery, handleSubmit }) {
 	)
 }
 
-function ResultArea({ messages, loading }) {
+function ResultArea({ messages, loading, isUsingRAG }) {
+	function decideText(isAi, isUsingRAG, message) {
+		if (isAi) {
+			if (isUsingRAG) {
+				return message.answerWithRAG
+			} else {
+				return message.answerWithoutRAG
+			}
+		} else {
+			return message.text
+		}
+	}
 	return (
 		<div className="text-body">
 			{messages.length > 0 ? (
-				messages.map((m, i) => (
+				messages.map((message, index) => (
 					<ResultText
-						key={i}
-						isUser={m.role === "user"}
-						text={m.text}
+						key={index}
+						isUser={message.role === "user"}
+						text={decideText(
+							message.role == "ai",
+							isUsingRAG,
+							message
+						)}
 					/>
 				))
 			) : (
@@ -105,4 +137,18 @@ function ResultText({ isUser, text }) {
 	)
 }
 
+function SwitchMode({ isUsingRAG, setIsUsingRAG }) {
+	return (
+		<div>
+			<label>
+				Use RAG:
+				<input
+					type="checkbox"
+					checked={isUsingRAG}
+					onChange={() => setIsUsingRAG((prev) => !prev)}
+				/>
+			</label>
+		</div>
+	)
+}
 export default App

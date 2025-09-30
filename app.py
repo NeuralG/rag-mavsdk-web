@@ -1,9 +1,10 @@
 from flask import Flask, request, jsonify
-from backend.LLM_RAG.askToLLM import askLLM
 from flask_cors import CORS
+from backend.LLM_RAG.askToLLM import askLLM
+from backend.LLM_RAG.askToLLM import askLLMnoRAG
 
 app = Flask(__name__)
-CORS(app)  # allow all origins (for dev)
+CORS(app)
 
 
 @app.route("/", methods=["POST"])
@@ -12,6 +13,13 @@ def query():
     question = data["question"]
     oldMessages = data["oldMessages"]
 
-    answer = askLLM(question, oldMessages, 10)
+    answerWithRAG = askLLM(question, oldMessages, 10)
+    answerWithoutRAG = askLLMnoRAG(question, oldMessages)
 
-    return jsonify({"question": question, "answer": answer})
+    return jsonify(
+        {
+            "question": question,
+            "answerWithRAG": answerWithRAG,
+            "answerWithoutRAG": answerWithoutRAG,
+        }
+    )
